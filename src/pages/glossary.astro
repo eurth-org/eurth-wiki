@@ -1,0 +1,38 @@
+---
+// The glossary: each term has an id to link to, and the whole set is given to search engines
+// as a DefinedTermSet.
+import { definedTermSet } from '@eurth/style/build';
+import Page from '@eurth/style/components/Page.astro';
+import { site } from '../../eurth.config.mjs';
+
+const terms = [
+  { id: 'gravitas', term: 'Gravitas', definition: 'Weight and seriousness of manner. Here: how solemnly a motto is meant, from 0 (a shrug) to 100 (carved in granite).' },
+  { id: 'motto', term: 'Motto', definition: 'A short phrase that states what a nation, family or institution stands for. In heraldry it sits on a scroll under or over the arms.' },
+  { id: 'plate', term: 'Plate', definition: 'The framed panel a motto is shown on: the picture this tool makes.' },
+  { id: 'scroll', term: 'Scroll', definition: 'The ribbon in a coat of arms that carries the motto.' },
+];
+---
+
+<Page
+  site={site}
+  title="Glossary of motto terms"
+  description="The words used in Starter, explained in a sentence each: gravitas, motto, plate and scroll. A short glossary for worldbuilders."
+  crumbs={[{ name: 'Glossary', path: '/glossary/' }]}
+  jsonld={[definedTermSet(site, { name: 'Glossary of motto terms', path: '/glossary/', terms })]}
+>
+  <article class="eu-prose">
+    <p class="eu-kicker">Glossary</p>
+    <h1>Glossary of motto terms</h1>
+    <p class="eu-lead">The words this tool uses, in a sentence each. See the <a href="/guide/">guide</a> for how they fit together, or go straight to the <a href="/">maker</a>.</p>
+    <dl>
+      {
+        terms.map((t) => (
+          <>
+            <dt id={t.id}>{t.term}</dt>
+            <dd>{t.definition}</dd>
+          </>
+        ))
+      }
+    </dl>
+  </article>
+</Page>

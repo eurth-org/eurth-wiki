@@ -1,0 +1,20 @@
+// A static site (dist/): no Worker code, only files. Static assets are free and unlimited on
+// the Workers Free plan; add a Worker script only if the tool's brief says it needs one.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "eurth-wiki",
+  // The Cloudflare account that holds the eurth.org zone. Not a secret.
+  "account_id": "0954ead81ed9fd06d343580d95902280",
+  "compatibility_date": "2026-11-01",
+  // No workers.dev address: until its door opens, a tool's site doesn't exist anywhere.
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  // Deploying creates this custom domain, DNS record included: so only the launch workflow
+  // deploys before the door, and it waits for the door's time.
+  "routes": [{ "pattern": "wiki.eurth.org", "custom_domain": true }]
+}

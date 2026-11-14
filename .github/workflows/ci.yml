@@ -1,0 +1,13 @@
+# Check, build and test on every push and pull request; axe and Lighthouse on main; deploy main
+# once the door has opened. All of it lives in @eurth/style, so every tool stays in step.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    uses: eurth-org/eurth-style/.github/workflows/tool-ci.yml@v1
+    secrets: inherit

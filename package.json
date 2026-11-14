@@ -1,0 +1,35 @@
+{
+  "name": "eurth-wiki",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Wiki (wiki.eurth.org): turns a nation's details into a ready-to-paste IIWiki country page and infobox. One of Eurth's free worldbuilding tools.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "npm run build && wrangler dev",
+    "check": "astro check",
+    "test": "vitest run",
+    "axe": "eurth-axe dist",
+    "images": "node tools/make-images.mjs",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "^9.1.6",
+    "@eurth/profile": "github:eurth-org/eurth-profile#semver:^1",
+    "@eurth/style": "github:eurth-org/eurth-style#semver:^1",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "astro": "^7.4.12",
+    "svelte": "^5.57.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0",
+    "wrangler": "^4.162.0"
+  }
+}

@@ -1,0 +1,12 @@
+---
+import Page from '@eurth/style/components/Page.astro';
+import { site } from '../../eurth.config.mjs';
+---
+
+<Page site={site} title="Page not found" description="This page doesn't exist. The maker, the guide, the glossary and the templates do." noindex>
+  <div class="eu-prose">
+    <h1>Page not found</h1>
+    <p class="eu-lead">There's nothing at this address. It may have moved, or the link may have lost a letter on the way.</p>
+    <p><a class="eu-btn" href="/">Back to the maker</a></p>
+  </div>
+</Page>

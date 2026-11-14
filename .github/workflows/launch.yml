@@ -1,0 +1,15 @@
+# Opens the door: builds on the evening before, waits for the time in LAUNCH_AT, deploys.
+# The cron is 22:30 UTC on 22 December, the evening before Wiki's door on 23 December 2026.
+# Run it by hand if the scheduled run hasn't started by 22:45 UTC.
+# Once the tool is live, delete this file: CI and the nightly run take over.
+name: Launch
+
+on:
+  schedule:
+    - cron: '30 22 22 12 *'
+  workflow_dispatch:
+
+jobs:
+  launch:
+    uses: eurth-org/eurth-style/.github/workflows/tool-launch.yml@v1
+    secrets: inherit

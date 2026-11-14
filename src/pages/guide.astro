@@ -1,0 +1,52 @@
+---
+// The guide: the subject explained well, with sources and the day it was last brought up to
+// date. Search engines get the breadcrumb and the article's date as structured data.
+import { article, wikipedia } from '@eurth/style/build';
+import Page from '@eurth/style/components/Page.astro';
+import { site } from '../../eurth.config.mjs';
+
+const updated = '2026-11-14';
+const description = 'What makes a national motto last: keep it short, say one thing, and mean it. A short guide for worldbuilders, with real examples and sources.';
+---
+
+<Page
+  site={site}
+  title="How to write a national motto"
+  description={description}
+  crumbs={[{ name: 'Guide', path: '/guide/' }]}
+  jsonld={[article(site, { headline: 'How to write a national motto', path: '/guide/', description, updated })]}
+>
+  <article class="eu-prose">
+    <p class="eu-kicker">Guide</p>
+    <h1>How to write a national motto</h1>
+    <p class="eu-lead">A motto is the shortest thing a country says about itself. The good ones are three or four words that have outlived the governments that chose them.</p>
+
+    <h2>Keep it short</h2>
+    <p>
+      Most national mottos are under six words. France manages three: <i lang="fr">Liberté, égalité, fraternité</i>. A motto has to fit on a coin, a seal and a
+      schoolroom wall; if yours needs a comma and a subordinate clause, it is a mission statement.
+    </p>
+
+    <h2>Say one thing</h2>
+    <p>
+      A motto names what holds the country together: unity, faith, freedom, endurance. Belgium's <i lang="fr">L'union fait la force</i> ("unity makes strength")
+      is one idea, and a telling one for a country of several languages. Pick the tension your nation lives with, and take a side.
+    </p>
+
+    <h2>Choose the language on purpose</h2>
+    <p>
+      Latin lends age; a living language lends ownership; an old local language lends roots. Whichever you choose tells readers who the motto is for. The
+      <a href="/glossary/">glossary</a> explains the terms.
+    </p>
+
+    <h2>Try it</h2>
+    <p>Open the <a href="/">maker</a>, or start from one of the <a href="/templates/">templates</a>. When the plate looks right, give it a country: <a href="https://eurth.org">Eurth</a> has a world for it to live in.</p>
+
+    <h2>Sources</h2>
+    <ul>
+      <li><a href={wikipedia('List of national mottos', site.host)}>List of national mottos</a>, Wikipedia.</li>
+      <li><a href={wikipedia('Motto', site.host)}>Motto</a>, Wikipedia: origins in heraldry.</li>
+    </ul>
+    <p class="eu-muted">Last updated <time datetime={updated}>14 November 2026</time>.</p>
+  </article>
+</Page>
