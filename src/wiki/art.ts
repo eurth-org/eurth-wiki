@@ -10,17 +10,20 @@ import type { Country } from './model';
 
 const xml = (s: string): string => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+/** The rows that say most in least space, in the infobox's order. */
+const SHOWN = ['capital', 'demonym', 'government_type', 'legislature', 'area_km2', 'population_estimate', 'currency'];
+
 export function infoboxArt(country: Country, rows = 7): string {
   const c = resolveColors(tokens, 'light');
   const box = preview(country);
-  const list = box.rows.filter((row) => !row.sub).slice(0, rows);
+  const list = box.rows.filter((row) => SHOWN.includes(row.param)).slice(0, rows);
   const sans = xml(tokens.type.families.sans);
   const height = 250 + list.length * 40;
   const lines = list
     .map((row, i) => {
       const y = 232 + i * 40;
-      const shown = row.shown.length > 20 ? `${row.shown.slice(0, 19)}…` : row.shown;
-      return `<text x="24" y="${y}" font-size="19" font-weight="700" fill="${c.ink}">${xml(row.label.split(' (')[0]!.replace('Capital and largest city', 'Capital'))}</text><text x="186" y="${y}" font-size="19" fill="${c.ink}">${xml(shown)}</text>`;
+      const shown = row.shown.length > 24 ? `${row.shown.slice(0, 23)}…` : row.shown;
+      return `<text x="24" y="${y}" font-size="19" font-weight="700" fill="${c.ink}">${xml(row.label.split(' (')[0]!.replace('Capital and largest city', 'Capital'))}</text><text x="164" y="${y}" font-size="19" fill="${c.ink}">${xml(shown)}</text>`;
     })
     .join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 416 ${height}" width="416" height="${height}" font-family="${sans}" role="img" aria-label="An infobox for ${xml(box.title)}">

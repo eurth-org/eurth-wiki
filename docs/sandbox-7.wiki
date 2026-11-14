@@ -1,0 +1,258 @@
+This page explains how to easily add a new country and integrate it with the existing Eurth lore. There is also a shorter tutorial on how to remove any retired countries.
+
+==Before you begin==
+
+It is very much recommended that new members read through the MoS and the Wikimedia help page before creating pages.
+
+* https://www.mediawiki.org/wiki/Help:Contents
+* https://commons.wikimedia.org/wiki/Help:Contents
+
+==Adding a country==
+
+=== Create the country page ===
+
+We use the default <nowiki>{{template:infobox_country}}</nowiki> made available by IIWiki. This template includes some shortcuts and lore hints to help players move forward with their writing.
+
+{{hidden begin |toggle=left |titlestyle=font-size:120% |title=Infobox country}}
+<pre style='overflow:auto'>{{Infobox country
+<!-- NAMES -->
+ | conventional_long_name = {{PAGENAME}}
+ | native_name = <!--Country's name (usually full name) in its native language, hence in italics (double quotemarks)-->
+ | common_name = {{PAGENAME}}
+<!-- SYMBOLS -->
+ | image_flag = Flag of {{PAGENAME}}.png
+ | alt_flag = Flag of {{PAGENAME}}
+ | flag_border = <!--set to no to disable border around the flag-->
+ | image_coat = Coat of arms of {{PAGENAME}}.png
+ | alt_coat = Coat of arms of
+ | symbol_type = Coat of arms <!--emblem, seal, etc (if not a coat of arms)-->
+ | symbol_footnote = <!--optional reference or footnote for the symbol caption-->
+ | national_motto = <!--in inverted commas and wikilinked if link exists-->
+ | englishmotto = <!--English language version of motto-->
+ | national_anthem = <!--in inverted commas and wikilinked if link exists-->
+ | royal_anthem = <!--in inverted commas and wikilinked if link exists-->
+ | other_symbol_type = <!--Use if a further symbol exists, e.g. hymn-->
+ | other_symbol =
+<!-- GEOGRAHY -->
+ | image_map = Map of {{PAGENAME}}.png
+ | map_width = 275px
+ | alt_map = Map of {{PAGENAME}}
+ | map_caption = Map of {{PAGENAME}}
+ | capital = <!--Name of country/territory's capital, wikilinked if link exists-->
+ | largest_city = <!--Name of country/territory's largest city. Use “capital” (without quotation marks) if it's the capital.-->
+ | largest_settlement_type = <!--Type of settlement if largest settlement not a city-->
+ | largest_settlement = <!--Name of largest settlement-->
+<!-- DEMOGRAPHICS -->
+ | official_languages = <!--Languages recognised in legislation, constitution, etc-->
+ | national_languages = <!--Country/territory-wide languages recognised but not necessarily in country/territory-wide law, etc-->
+ | regional_languages = <!--Languages recognised or associated with particular regions within the country/territory-->
+ | languages_type = <!--Use to specify a further type of language, if not official, national, or regional-->
+ | languages = <!--Languages of the further type-->
+ | languages_sub = <!--Is this further type of language a sub-item of the previous non-sub type? (“yes” or “no”)-->
+ | languages2_type = <!--Another further type of language-->
+ | languages2 = <!--Languages of this second further type-->
+ | languages2_sub = <!--Is the second alternative types of languages a sub-item of the previous non-sub type? (“yes” or “no”)-->
+ | ethnic_groups = <!--List/breakdown of ethnic groups within the country/territory-->
+ | ethnic_groups_year = <!--Year of ethnic groups data (if provided)-->
+ | ethnic_groups_ref = <!--(for any ref/s to associate with ethnic groups data)-->
+ | religion = <!--Religion-->
+ | religion_year = <!--Year of religion data (if provided)-->
+ | religion_ref = <!--(for any ref/s to associate with religion data)-->
+ | demonym = <!--Term/s describing those associated with the country/territory (e.g. “Belgian” for the country Belgium)-->
+<!-- POLITICS -->
+ | government_type = <!--(often a compound multi-wikilinked term, e.g. “Federal semi-presidential constitutional republic”, etc)-->
+ | leader_title1 = <!--(for a country, usually the head of state's (wikilinked) title, e.g. “President”, “Monarch”)-->
+ | leader_name1 =
+ | leader_title2 = <!--(could be “Vice President”, otherwise “Prime Minster”, etc, etc)-->
+ | leader_name2 =
+ | legislature = <!--Name of the country/territory's governing body, e.g. “Parliament”, “Congress”, etc-->
+ | upper_house = <!--Name of governing body's upper house, if given (e.g. “Senate”)-->
+ | lower_house = <!--Name of governing body's lower house, if given (e.g. “Chamber of Deputies”)-->
+<!-- HISTORY -->
+ | sovereignty_type = <!--Brief description of country/territory's status (“Independence [from…]”, “Autonomous province [of…]”, etc)-->
+ | sovereignty_note =
+ | established_event1 = <!--First key event in history of country/territory's status or formation-->
+ | established_date1 = <!--Date of first key event-->
+ | established_event2 = <!--Second key event-->
+ | established_date2 = <!--Date of second key event-->
+<!-- STATISTICS -->
+ | area_rank =
+ | area = <!--Major area size (in [[Template:convert]] either km2 or sqmi first)-->
+ | area_km2 = <!--Major area size (in square km)-->
+ | area_sq_mi = <!--Area in square mi (requires area_km2)-->
+ | area_footnote = <!--Optional footnote for area-->
+ | percent_water =
+ | area_label = <!--Label under “Area” (default is “Total”)-->
+ | area_label2 = <!--Label below area_label (optional)-->
+ | area_data2 = <!--Text after area_label2 (optional)-->
+ | population_estimate =
+ | population_estimate_rank =
+ | population_estimate_year =
+ | population_census =
+ | population_census_year =
+ | population_density_km2 =
+ | population_density_sq_mi =
+ | population_density_rank =
+ | nummembers = <!--An alternative to population for micronation-->
+ | GDP_PPP = <!--(Gross Domestic Product from Purchasing Power Parity)-->
+ | GDP_PPP_rank =
+ | GDP_PPP_year =
+ | GDP_PPP_per_capita =
+ | GDP_PPP_per_capita_rank =
+ | GDP_nominal =
+ | GDP_nominal_rank =
+ | GDP_nominal_year =
+ | GDP_nominal_per_capita =
+ | GDP_nominal_per_capita_rank =
+ | Gini = <!--(Gini measure of income inequality; input number only; valid values are between 0 and 100)-->
+ | Gini_ref = <!--(for any ref/s to associate with Gini number)-->
+ | Gini_rank =
+ | Gini_year =
+ | HDI_year = <!-- Please use the year to which the data refers, not the publication year-->
+ | HDI = <!--(Human Development Index; input number only; valid values are between 0 and 1)-->
+ | HDI_change = <!--increase/decrease/steady; rank change from previous year-->
+ | HDI_rank =
+ | HDI_ref = <!--(for any ref/s to associate with HDI number)-->
+ | currency = <!--Name of currency used in country/territory-->
+ | currency_code = <!--ISO 4217 code for currency (each usually three capital letters)-->
+ | time_zone = <!--e.g. GMT, PST, AST, etc, etc (wikilinked if possible)-->
+ | utc_offset = <!--in the form “+N”, where N is the number of hours offset-->
+ | time_zone_DST = <!--Link to DST (Daylight Saving Time) used, otherwise leave empty-->
+ | utc_offset_DST = <!--in the form “+N”, where N is the number of hours offset-->
+ | DST_note = <!--Optional note regarding DST use-->
+ | antipodes = <!--Place/s exactly on the opposite side of the world to country/territory-->
+ | date_format = <!--all-numeric date format and era, such as [[Common Era|CE]], [[Anno Domini|AD]], [[Hijri year|AH]], etc.; e.g. {{abbr|yyyy|year}}-{{abbr|mm|month}}-{{abbr|dd|day}} ([[Anno Domini|AD]]) -->
+ | drives_on = <!--“right” or “left” (side of road)-->
+ | cctld = <!--Internet country code top-level domain identifier (e.g. [[.br]], [[.de]], etc)
+ | iso3166code = <!--Use to override default from common_name parameter above; omit using “omit”.-->
+ | calling_code = <!--e.g. [[+1]], [[+531]], [[+44]], etc-->
+ | patron_saint = <!--Use patron_saints for multiple-->
+ | image_map3 = <!--Optional third map position, e.g. for use with reference to footnotes below it-->
+ | alt_map3 = <!--alt text for third map position-->
+<!-- FOOTNOTES -->
+ | footnote_a = <!--For any footnote <sup>a</sup> used above-->
+ | footnote_b = <!--For any footnote <sup>b</sup> used above-->
+}}
+
+{{Under construction}}
+
+'''{{PAGENAME}}''', officially known as the NATIONTYPE of {{PAGENAME}}, is a sovereign state in [[CONTINENT]] on [[Eurth]]. It is bordered by NEIGHBOURINGNATION to the north, NEIGHBOURINGNATION in the east, NEIGHBOURINGNATION to the south, and NEIGHBOURINGNATION in the west.
+
+(1st paragraph. Name. Location. Borders. Approx population and size. Capital city.)
+
+(2nd paragraph. Political system. Short history in 1 sentence. Link with present in 1 sentence. Head of state.)
+
+(3rd paragraph. Economy in 2 sentences. International relations in 1 sentence.)
+
+== Etymology ==
+
+(WIP. Where does your country's name come from? Most RL national names come from a small variety of choice. Some examples: land of a tribe (ex. France, Persia, Mongolia, Russia), characteristic geography (ex. Netherlands, India, Morocco), an old ruler or religious figure (ex. Philippines, San Marino, Europa, Saudi Arabia), the Latin description of a place (ex. Australia, Argentina, Liberia). How is the name pronounced? How is the name translated into other languages?)
+
+== Geography ==
+
+(WIP. Landscape. Climate. Where exactly is your country compared to others on the global map? Describe the landscape, plants, and animals. Which mountains and rivers are important to include? Describe are the climate and seasons? How does geography determine where people live? Are there areas separated from one another? How about cities? This will greatly help you with the next part of history.)
+
+<gallery>
+Example.jpg|A stereotypical landscape.
+Example.jpg|A wild landscape.
+Example.jpg|Close-up of a plant.
+Example.jpg|A herbivorous animal.
+Example.jpg|A carnivorous animal.
+</gallery>
+
+== History ==
+
+(WIP. How did your current country come to be? What were the country's previous incarnations? Was the country part of a union with a neighbour? Which events shaped the way the country is today?)
+
+== Politics ==
+
+{{multiple image
+ | align = right
+ | total_width = 300
+ | image_style = border:none;
+ | title =
+ | perrow = 2/2
+ | caption_align = center
+ | image1 = Man Silhouette2.jpg
+ | caption1 = Head of State.
+ | image2 = Man Silhouette2.jpg
+ | caption2 = Head of Government.
+}}
+
+(WIP. Government. Separation of powers. Who rules, how, and for how long? Political parties. What levels of government exist? How about the local level? Who makes the laws? Who deals out your justice? Which government services exist? What is the name of your police? How are the armed forces organised? Foreign affairs, alliances, membership of international organisations.)
+
+== Economy ==
+
+(WIP. Employment. Exports and imports. International partners. Currency. Energy. Transportation. Science & technology. Unemployment numbers. Tourism. Media.)
+
+== Demographics ==
+
+(WIP. Demographics. Ethnic groups. Social classes. Language. Education. Marriage. Religion. Healthcare. Diseases.)
+
+== Culture ==
+
+(WIP. Cuisine. Literature. Visual arts. Art. Architecture. Entertainment. Music & Radio. Television. Cuisine. Local customs. Clothing. Morality. Sports. Stereotypes. Your national symbols such as the flag and national anthem. Public holidays and festivities.)
+
+== References ==
+
+{{Reflist}}
+{{Template:Eurth topics}}
+[[Category:{{PAGENAME}}]]
+</pre>
+{{hidden end}}
+
+===Add the flags===
+
+If you used the template in step 1, you'll now see a link to your flag in the infobox sidebar.
+
+# Clicking that will take you to the image uploader, where you can add your flag in the right place.
+# Preferably your image will be in the PNG or SVG format. These make the prettiest images.
+# Last step before saving your: make sure the image is added to the category with the country name. This keeps everything about your country neat and tidy in one single country category. It will save you some searching later. Use the following code snippet in the image description, and replace our dummy text with your actual country name: <pre>[[Category:REPLACE_THIS_WITH_THE_NATION_NAME]]</pre>
+
+All done. Should ever want to update your flag, you can replace it on the image description page. Click on the text link "Upload a new version of this file". Once you've replaced your image, it will also automatically update the image everywhere you used it. So no more going back and re-doing all your other pages.
+
+===Create the countryflag shortcut===
+
+Now we set up the nice little miniature flags that are frequently used in lists.
+
+1. Go to https://iiwiki.com/wiki/Template:Country_data_REPLACE_THIS_WITH_THE_NATION_NAME
+
+2. Change the URL to include the country name, and create the page.
+
+3. Copypaste the following information:
+
+<pre>{{ {{{1<noinclude>|country showdata</noinclude>}}}
+| alias = REPLACE_THIS_WITH_THE_NATION_NAME
+| flag alias = Flag of REPLACE_THIS_WITH_THE_NATION_NAME.png
+| size = {{{size|}}}
+| name = {{{name|}}}
+| variant = {{{variant|}}}  <!-- only necessary if there is one or more flag alias-variant parameters, otherwise omit -->
+}}</pre>
+4. Replace the nation name.
+
+5. Click "Show preview" to test.
+
+6. Click "Save changes" when everything looks alright. (Or ask for help when something doesn't look right.)
+
+You can now use the following shortcode to show your country flag next to your country name. This is useful for lists.
+
+<pre>{{flag|REPLACE_THIS_WITH_THE_NATION_NAME}}</pre>
+
+===Create the country category===
+
+Make sure to create the country category, and save it with this information. This will help us keep all information collected in one place.
+
+<pre>{{main|REPLACE_THIS_WITH_THE_NATION_NAME}}
+[[Category:Countries (Eurth)]]</pre>
+
+===Add the country to our most common lists===
+
+Make sure you respect the list rules and keep everything sorted. Usually these lists are in alphabetical order.
+
+* [[:Category:Lists_of_Eurth]]
+
+==Removing a country==
+
+# Remove the country from all the common lists mentioned above.
+# Use the [[Special:WhatLinksHere]] feature to check any remaining links.
+# Change the parent category to retired, meaning: from <nowiki>[[Category:Countries (Eurth)]]</nowiki> to <nowiki>[[Category:Retired countries (Eurth)]]</nowiki>.
