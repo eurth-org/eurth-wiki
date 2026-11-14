@@ -7,8 +7,11 @@ import type { EurthProfile } from '@eurth/profile';
 import calderwyn from '@eurth/profile/examples/calderwyn.eurth.json';
 import hesperwick from '@eurth/profile/examples/hesperwick.eurth.json';
 import vantmoor from '@eurth/profile/examples/vantmoor.eurth.json';
-import { clean, type Country } from './model';
+import type { Country } from './model';
 import { fromProfile } from './profile';
+import { teland } from './teland';
+
+export { teland };
 
 export interface Example {
   id: string;
@@ -19,41 +22,6 @@ export interface Example {
   /** The profile it was read from, if it came from one. */
   profile?: EurthProfile;
 }
-
-/** Teland, filled in by hand: every group of the form has something in it. */
-export const teland: Country = clean({
-  official: 'Republic of Teland',
-  common: 'Teland',
-  motto: 'Steady against the tide',
-  capital: 'Selunna',
-  largest: 'Selunna',
-  languages: 'Telandic',
-  demonym: 'Telandic',
-  government: 'Parliamentary republic',
-  leaderTitle1: 'President',
-  leaderName1: 'Maelin Ostrevin',
-  leaderTitle2: 'Prime Minister',
-  leaderName2: 'Aerin Kalluna',
-  legislature: 'National Assembly',
-  sovereignty: 'Independence',
-  event1: 'Founding of Selunna',
-  date1: '1184',
-  event2: 'Republic declared',
-  date2: '12 March 1871',
-  area: '512,000',
-  water: '2.4',
-  population: '48,200,000',
-  populationYear: '2026',
-  gdp: '$1.94 trillion',
-  gdpYear: '2026',
-  currency: 'Selun',
-  currencyCode: 'TLS',
-  timeZone: 'UTC+1',
-  dateFormat: 'dd-mm-yyyy',
-  drivesOn: 'right',
-  callingCode: '+42',
-  tld: '.tl',
-});
 
 /** The examples, in the order the page shows them. `siteUrl` is this tool's own address. */
 export function examples(siteUrl: string): Example[] {

@@ -1,0 +1,102 @@
+---
+// Examples: finished countries, each a link into the creator. The links are made at build time
+// with the same code the creator uses, so they can never drift apart.
+import { encodeState } from '@eurth/style';
+import Page from '@eurth/style/components/Page.astro';
+import { site } from '../../eurth.config.mjs';
+import { examples } from '../wiki/examples';
+import { describe, preview } from '../wiki/infobox';
+import { LINK_VERSION, compact } from '../wiki/model';
+
+const list = examples(site.url).map((example) => {
+  const state = compact(example.country);
+  const rows = preview(example.country).rows;
+  return {
+    ...example,
+    href: Object.keys(state).length ? `/?d=${encodeState(state, LINK_VERSION)}` : '/',
+    description: describe(example.country),
+    rows: rows.filter((row) => !row.sub).slice(0, 5),
+    count: rows.length,
+  };
+});
+---
+
+<Page
+  site={site}
+  title="Example country pages"
+  description="Four example countries to start from, from a full infobox to a bare name: open one in the creator, change what you like and copy the wikitext."
+  crumbs={[{ name: 'Examples', path: '/examples/' }]}
+>
+  <div class="eu-stack">
+    <header class="eu-prose">
+      <p class="eu-kicker">Examples</p>
+      <h1>Example country pages</h1>
+      <p class="eu-lead">
+        Somewhere to start. Open one in the <a href="/">creator</a> and change what you like; the <a href="/guide/">guide</a> explains what each part of the page is for.
+      </p>
+    </header>
+    <ul class="gallery">
+      {
+        list.map((example) => (
+          <li>
+            <a class="eu-card" href={example.href}>
+              <h2>{example.name}</h2>
+              <p>{example.note}</p>
+              {example.rows.length > 0 && (
+                <dl class="eu-data">
+                  {example.rows.map((row) => (
+                    <div>
+                      <dt>{row.label}</dt>
+                      <dd>{row.shown}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+              <p class="eu-muted">{example.count === 0 ? 'An infobox with a title and nothing else yet.' : `${example.count} rows in the infobox.`} Open in the creator.</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="eu-prose eu-muted">
+      Calderwyn, Vantmoor and Hesperwick are read from nation profile files, exactly as your own would be. Teland was typed in by hand. All four are invented.
+    </p>
+  </div>
+</Page>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gallery h2 {
+    font: var(--type-subtitle);
+  }
+
+  .gallery dl {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin: 0;
+  }
+
+  .gallery dl div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-2);
+  }
+
+  .gallery dt {
+    font-weight: 700;
+  }
+
+  .gallery dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+</style>

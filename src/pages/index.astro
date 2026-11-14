@@ -1,37 +1,61 @@
 ---
-// The maker, and under it what search engines and newcomers both want: what it is, how to use
+// The creator, and under it what search engines and newcomers both want: what it is, how to use
 // it, and answers to the usual questions (also given to search engines as structured data).
 import { faqPage, webApplication } from '@eurth/style/build';
 import Page from '@eurth/style/components/Page.astro';
 import { site } from '../../eurth.config.mjs';
-import Maker from '../tool/Maker.svelte';
+import Creator from '../ui/Creator.svelte';
+import { teland } from '../wiki/teland';
+import { compact } from '../wiki/model';
 
 const faq = [
-  { q: 'Is Starter free?', a: 'Yes. There is no account, no watermark and no paid tier. It is made by the Eurth worldbuilding community for anyone who needs it.' },
-  { q: 'Where is my plate saved?', a: 'In its link. The link holds the whole design, so copying the link is saving it. You can also download the picture, or save your nation as a profile file that the other Eurth tools can read. Nothing is kept in your browser or on a server.' },
+  { q: 'Is Wiki free?', a: 'Yes. There is no account, no watermark and no paid tier. It is made by the Eurth worldbuilding community for anyone who needs it.' },
+  {
+    q: 'Which wiki is it for?',
+    a: 'IIWiki, the wiki Eurth\'s members write on. The infobox is the "Infobox country" template, which most wikis that run on MediaWiki share, so the wikitext is a good start elsewhere too.',
+  },
+  {
+    q: 'Does it post the page for me?',
+    a: 'No. It hands you wikitext to paste and images to upload, and you stay the author. It never contacts the wiki, or any other site.',
+  },
+  {
+    q: 'What is the difference between the sandbox and the live page?',
+    a: 'A sandbox draft leaves out the footer navboxes and the categories, so an unfinished page stays out of the lists that readers browse. The live page puts them back.',
+  },
+  {
+    q: 'Where is my page saved?',
+    a: 'In its link. The link holds everything you typed, so copying the link is saving it. You can also save your nation as a profile file that the other Eurth tools can read. Nothing is kept in your browser or on a server.',
+  },
   { q: 'Does it work offline, and on a phone?', a: 'Yes to both. After the first visit the site keeps a copy of itself on your device and opens without a connection.' },
 ];
 ---
 
-<Page site={site} jsonld={[webApplication(site, { featureList: ['Motto plates', 'Link that holds the design', 'SVG and PNG downloads', 'Nation profile file'] }), faqPage(faq)]}>
+<Page
+  site={site}
+  jsonld={[webApplication(site, { featureList: ['Country infobox as wikitext', 'Live preview of the infobox', 'Page skeleton with prompts', 'Sandbox and live-page outputs', 'Fills in from a nation profile file', 'Flag and arms named for the wiki'] }), faqPage(faq)]}
+>
   <div class="eu-stack">
     <header class="eu-stack intro">
-      <p class="eu-kicker">Starter, by Eurth</p>
-      <h1>A motto plate for your nation</h1>
-      <p class="eu-lead">Name your nation, give it a motto, decide how seriously it means it. Free, in your browser, no account needed.</p>
+      <p class="eu-kicker">Wiki country page creator, by Eurth</p>
+      <h1>Your country, wiki-ready</h1>
+      <p class="eu-lead">Fill in what you know about your nation and copy a finished infobox and page skeleton for IIWiki. Free, in your browser, no account needed.</p>
     </header>
 
-    <!-- client:load draws the maker as real HTML first, then wakes it up. -->
-    <Maker client:load siteName={site.name} siteUrl={site.url} />
+    <!-- client:load draws the creator as real HTML first, then wakes it up. -->
+    <Creator client:load siteName={site.name} siteUrl={site.url} sample={compact(teland)} />
 
     <section class="eu-prose">
       <h2>How it works</h2>
       <ol>
-        <li>Type your nation's name and its motto, or press Random and edit what comes out.</li>
-        <li>Set the gravitas: how solemnly the motto is meant. The frame thickens with it.</li>
-        <li>Copy the link, the picture or the description, or share it with the Eurth forum.</li>
+        <li>Load your nation's profile file if you have one, or start typing. The preview builds itself as you go.</li>
+        <li>Choose whether the page is for your sandbox or for the live wiki.</li>
+        <li>Copy the infobox, or the whole page skeleton with a prompt under every heading, and paste it into the wiki's editor.</li>
+        <li>Upload your flag and arms to the wiki under the names the infobox asks for.</li>
       </ol>
-      <p>New to mottos? The <a href="/guide/">guide</a> explains what makes one last, the <a href="/glossary/">glossary</a> has the words, and the <a href="/templates/">templates</a> give you somewhere to start.</p>
+      <p>
+        New to wiki pages? The <a href="/guide/">guide</a> walks through a country page from sandbox to live, the <a href="/glossary/">glossary</a> has the words, and
+        the <a href="/examples/">examples</a> show finished infoboxes to start from.
+      </p>
 
       <h2>Questions</h2>
       <dl>
@@ -47,7 +71,7 @@ const faq = [
     </section>
   </div>
 
-  <Fragment slot="inspirations">Starter is the template every Eurth tool begins from; it takes after Flagwright and Governmint.</Fragment>
+  <Fragment slot="inspirations">Wiki follows the "Eurth country setup" tutorial on IIWiki and the Infobox country template that wikis share.</Fragment>
 </Page>
 
 <style>

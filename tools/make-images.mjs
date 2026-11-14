@@ -8,8 +8,9 @@ import { site } from '../eurth.config.mjs';
 // The picture on the sharing image comes from the same code as the site (Vite reads TypeScript).
 const vite = await createServer({ server: { middlewareMode: true }, appType: 'custom', logLevel: 'error' });
 try {
-  const { plateSvg, templates } = await vite.ssrLoadModule('/src/tool/model.ts');
-  const made = await makeImages({ sharing: [{ file: 'og.png', html: sharingImage({ site, art: plateSvg(templates[0].plate) }) }] });
+  const { infoboxArt } = await vite.ssrLoadModule('/src/wiki/art.ts');
+  const { teland } = await vite.ssrLoadModule('/src/wiki/teland.ts');
+  const made = await makeImages({ sharing: [{ file: 'og.png', html: sharingImage({ site, art: infoboxArt(teland) }) }] });
   console.log(`Made ${made.map((file) => `public/${file}`).join(', ')}`);
 } finally {
   await vite.close();

@@ -1,52 +1,123 @@
 ---
-// The guide: the subject explained well, with sources and the day it was last brought up to
-// date. Search engines get the breadcrumb and the article's date as structured data.
-import { article, wikipedia } from '@eurth/style/build';
+// The guide: a country page from sandbox to live, with sources and the day it was last brought
+// up to date. Search engines get the breadcrumb and the article's date as structured data.
+//
+// PROVISIONAL: this is to become Orioni's "Eurth country setup" tutorial (User:Orioni/Sandbox 7
+// on IIWiki), rewritten for the web. Until that text is in docs/sandbox-7.wiki, the guide covers
+// what the brief settles (sandbox first, images, links, navboxes and categories) and the shape
+// of a standard country article.
+import { article, ref, wikipedia } from '@eurth/style/build';
 import Page from '@eurth/style/components/Page.astro';
 import { site } from '../../eurth.config.mjs';
+import { SECTIONS, imageLink } from '../wiki/page';
 
-const updated = '2026-11-14';
-const description = 'What makes a national motto last: keep it short, say one thing, and mean it. A short guide for worldbuilders, with real examples and sources.';
+const updated = '2026-11-15';
+const description = 'How to set up a country page on IIWiki: draft in your sandbox, fill in the infobox, name your images, link once per section, then go live. With sources.';
+const picture = imageLink('Map of Teland.png', 'Teland on Eurth.');
+const top = SECTIONS.filter((s) => !['See also', 'References'].includes(s.title));
 ---
 
 <Page
   site={site}
-  title="How to write a national motto"
+  title="How to set up a country page on IIWiki"
   description={description}
   crumbs={[{ name: 'Guide', path: '/guide/' }]}
-  jsonld={[article(site, { headline: 'How to write a national motto', path: '/guide/', description, updated })]}
+  jsonld={[article(site, { headline: 'How to set up a country page on IIWiki', path: '/guide/', description, updated })]}
 >
   <article class="eu-prose">
     <p class="eu-kicker">Guide</p>
-    <h1>How to write a national motto</h1>
-    <p class="eu-lead">A motto is the shortest thing a country says about itself. The good ones are three or four words that have outlived the governments that chose them.</p>
-
-    <h2>Keep it short</h2>
-    <p>
-      Most national mottos are under six words. France manages three: <i lang="fr">Liberté, égalité, fraternité</i>. A motto has to fit on a coin, a seal and a
-      schoolroom wall; if yours needs a comma and a subordinate clause, it is a mission statement.
+    <h1>How to set up a country page on IIWiki</h1>
+    <p class="eu-lead">
+      A country page is the front door of your nation. It doesn't need to be long on day one, but it does need the right frame: an infobox, an opening sentence and a
+      set of headings to grow into.
     </p>
 
-    <h2>Say one thing</h2>
+    <h2>Draft in your sandbox first</h2>
     <p>
-      A motto names what holds the country together: unity, faith, freedom, endurance. Belgium's <i lang="fr">L'union fait la force</i> ("unity makes strength")
-      is one idea, and a telling one for a country of several languages. Pick the tension your nation lives with, and take a side.
+      Every wiki user has room for drafts under their own name: a page such as <span class="eu-data">User:YourName/Sandbox</span>. Build your country there. Nobody
+      minds a half-finished sandbox, and you can save as often as you like without readers stumbling on it.
+    </p>
+    <p>
+      One thing matters while you draft: leave the footer <a href="/glossary/#navbox">navboxes</a> and the <a href="/glossary/#category">categories</a> off the page.
+      Both file a page in lists that readers browse, and a draft doesn't belong there yet. In the <a href="/">creator</a>, the "For my sandbox" output leaves them
+      out for you.
     </p>
 
-    <h2>Choose the language on purpose</h2>
+    <h2>Begin with the infobox</h2>
     <p>
-      Latin lends age; a living language lends ownership; an old local language lends roots. Whichever you choose tells readers who the motto is for. The
-      <a href="/glossary/">glossary</a> explains the terms.
+      The <a href="/glossary/#infobox">infobox</a> is the panel on the right of the page with the flag and the facts. On wikis it is a
+      <a href="/glossary/#template">template</a> called Infobox country: you write a list of <a href="/glossary/#parameter">parameters</a>, one per line, and the wiki
+      draws the box.
+    </p>
+    <p>
+      Fill in what you know and leave the rest out: an empty parameter draws no row, so a short infobox looks finished, not broken. A good first pass is the names,
+      the capital, the form of government and who leads it, the area, the population and the currency. Numbers go in as plain figures; the wiki works out the
+      density.
     </p>
 
-    <h2>Try it</h2>
-    <p>Open the <a href="/">maker</a>, or start from one of the <a href="/templates/">templates</a>. When the plate looks right, give it a country: <a href="https://eurth.org">Eurth</a> has a world for it to live in.</p>
+    <h2>Name your images the way the wiki expects</h2>
+    <p>
+      The infobox asks for image files by name. The custom, shared across wikis, is "Flag of" and "Coat of arms of" followed by the country's common name:
+      <span class="eu-data">Flag of Teland.svg</span>. Upload your files under exactly those names and the infobox finds them. The creator names its downloads that
+      way, so there is nothing to retype.
+    </p>
+
+    <h2>Open with one sentence</h2>
+    <p>
+      The first sentence says what the country is and where: the common name in bold, the official name in bold after it, the kind of state, and that it lies on
+      Eurth. A second sentence can give the capital and a third the population. The rest of the opening, the
+      <a href="/glossary/#lead">lead</a>, sums up the page in a paragraph or two, and can wait until the page has something to sum up.
+    </p>
+
+    <h2>Give every section a job</h2>
+    <p>Country articles share a set of headings, in an order readers have come to expect. Start with these and add your own under them:</p>
+    <ul>
+      {
+        top.map((s) => (
+          <li>
+            <b>{s.title}:</b> {s.prompt.replaceAll('{name}', 'the country')}
+          </li>
+        ))
+      }
+    </ul>
+    <p>
+      The page skeleton from the creator has every heading in place with a one-line prompt under it. The prompts are comments: the wiki doesn't show them, so you can
+      leave them in until the section is written.
+    </p>
+
+    <h2>Pictures: one form that works</h2>
+    <p>On IIWiki, write every picture in the text the same way, on the left or the right:</p>
+    <pre class="eu-data eu-scroll" tabindex="0" aria-label="An image in wikitext">{picture}</pre>
+    <p>
+      That is the file's name, a width of 250 pixels, the word <a href="/glossary/#thumbnail">thumb</a> for a frame with a caption, the side, and the caption. Other
+      sizes and options tend not to work there, so don't spend an evening on them.
+    </p>
+
+    <h2>Link once per section</h2>
+    <p>
+      Put a <a href="/glossary/#wikilink">link</a> on the first mention of a page in each section, and not again in that section. A reader who jumps straight to
+      "Economy" still finds the link to your capital there; a reader going from top to bottom isn't wading through blue text. The capital in the infobox is linked for
+      you.
+    </p>
+
+    <h2>Go live</h2>
+    <p>
+      When the draft reads well, move it to its real title, the country's common name, and put back what the sandbox left out: the Eurth navbox, your nation's own
+      navbox if it has one, and the categories. The creator's "For the live page" output adds them at the foot of the page.
+    </p>
+    <p>
+      Then keep it alive. Update the leaders after an election, the population every few years, and add a section when your nation grows one. If you don't have a
+      nation yet, <a href="https://eurth.org">Eurth</a> has a world with room for it.
+    </p>
 
     <h2>Sources</h2>
     <ul>
-      <li><a href={wikipedia('List of national mottos', site.host)}>List of national mottos</a>, Wikipedia.</li>
-      <li><a href={wikipedia('Motto', site.host)}>Motto</a>, Wikipedia: origins in heraldry.</li>
+      <li><a href={ref('https://iiwiki.com/', site.host)}>IIWiki</a>, the wiki Eurth's members write on.</li>
+      <li><a href={wikipedia('Template:Infobox country', site.host)}>Template:Infobox country</a>, Wikipedia: every parameter of the infobox, with examples.</li>
+      <li><a href={wikipedia('Wikipedia:WikiProject Countries', site.host)}>WikiProject Countries</a>, Wikipedia: the usual sections of a country article and what belongs in each.</li>
+      <li><a href={wikipedia('Wikipedia:Manual of Style/Linking', site.host)}>Manual of Style: Linking</a>, Wikipedia: when a link helps and when it is one too many.</li>
+      <li><a href={wikipedia('Help:Wikitext', site.host)}>Help:Wikitext</a>, Wikipedia: the markup itself, from headings to templates.</li>
     </ul>
-    <p class="eu-muted">Last updated <time datetime={updated}>14 November 2026</time>.</p>
+    <p class="eu-muted">Last updated <time datetime={updated}>15 November 2026</time>.</p>
   </article>
 </Page>

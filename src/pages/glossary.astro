@@ -6,24 +6,42 @@ import Page from '@eurth/style/components/Page.astro';
 import { site } from '../../eurth.config.mjs';
 
 const terms = [
-  { id: 'gravitas', term: 'Gravitas', definition: 'Weight and seriousness of manner. Here: how solemnly a motto is meant, from 0 (a shrug) to 100 (carved in granite).' },
-  { id: 'motto', term: 'Motto', definition: 'A short phrase that states what a nation, family or institution stands for. In heraldry it sits on a scroll under or over the arms.' },
-  { id: 'plate', term: 'Plate', definition: 'The framed panel a motto is shown on: the picture this tool makes.' },
-  { id: 'scroll', term: 'Scroll', definition: 'The ribbon in a coat of arms that carries the motto.' },
+  { id: 'calling-code', term: 'Calling code', definition: 'The digits dialled to reach a country from abroad, written with a plus sign: +32.' },
+  { id: 'category', term: 'Category', definition: 'A list that a page files itself in, by a line at its very end. Readers browse categories, so drafts are kept out of them.' },
+  { id: 'common-name', term: 'Common name', definition: 'The short name people use day to day: "Teland", not "Republic of Teland". The page and the image files are named after it.' },
+  { id: 'demonym', term: 'Demonym', definition: 'The word for the people of a place: Telandic for Teland, Belgian for Belgium.' },
+  { id: 'gdp', term: 'GDP (nominal)', definition: 'Everything a country produces in a year, valued at current prices, usually given in US dollars. Divided by the population it is GDP per head.' },
+  { id: 'infobox', term: 'Infobox', definition: 'The panel at the top right of a wiki page that gives the key facts at a glance. A country page uses the template "Infobox country".' },
+  { id: 'internet-domain', term: 'Internet domain', definition: 'The ending of a country\'s web addresses, two letters after a dot: .be for Belgium.' },
+  { id: 'lead', term: 'Lead', definition: 'The opening of an article, above the first heading. Its first sentence says what the subject is; the rest sums up the page.' },
+  { id: 'navbox', term: 'Navbox', definition: 'A box of links at the foot of a page that ties related pages together, such as every nation of Eurth. It is added with a template.' },
+  { id: 'official-name', term: 'Official name', definition: 'The full, formal name of a state, as its constitution writes it: "Republic of Teland". Wikis call it the conventional long name.' },
+  { id: 'parameter', term: 'Parameter', definition: 'One named value handed to a template, written as a line that starts with a pipe: | capital = Selunna.' },
+  { id: 'piped-link', term: 'Piped link', definition: 'A link that shows other words than the title of the page it leads to. The title comes first, then a pipe, then the words to show.' },
+  { id: 'reference', term: 'Reference', definition: 'A note that says where a fact comes from. References are collected at the foot of the page by the reflist template.' },
+  { id: 'sandbox', term: 'Sandbox', definition: 'A page under your own user name for drafts and experiments. Nothing in it counts as published.' },
+  { id: 'skeleton', term: 'Page skeleton', definition: 'A page with its headings in place and nothing under them yet. This tool adds a one-line prompt under each.' },
+  { id: 'template', term: 'Template', definition: 'A reusable piece of a wiki, called by its name in double curly brackets. The wiki swaps the call for the finished piece, such as an infobox.' },
+  { id: 'thumbnail', term: 'Thumbnail', definition: 'A picture shown small, in a frame with a caption, by the word "thumb" in its link.' },
+  { id: 'wikilink', term: 'Wikilink', definition: 'A link to another page of the same wiki, made by putting its title in double square brackets.' },
+  { id: 'wikitext', term: 'Wikitext', definition: 'The markup a wiki page is written in: plain text with a few signs for headings, links, pictures and templates.' },
 ];
 ---
 
 <Page
   site={site}
-  title="Glossary of motto terms"
-  description="The words used in Starter, explained in a sentence each: gravitas, motto, plate and scroll. A short glossary for worldbuilders."
+  title="Glossary of wiki terms"
+  description="The words you meet when writing a country page on a wiki, in a sentence each: infobox, template, parameter, sandbox, navbox, category and more."
   crumbs={[{ name: 'Glossary', path: '/glossary/' }]}
-  jsonld={[definedTermSet(site, { name: 'Glossary of motto terms', path: '/glossary/', terms })]}
+  jsonld={[definedTermSet(site, { name: 'Glossary of wiki terms', path: '/glossary/', terms })]}
 >
   <article class="eu-prose">
     <p class="eu-kicker">Glossary</p>
-    <h1>Glossary of motto terms</h1>
-    <p class="eu-lead">The words this tool uses, in a sentence each. See the <a href="/guide/">guide</a> for how they fit together, or go straight to the <a href="/">maker</a>.</p>
+    <h1>Glossary of wiki terms</h1>
+    <p class="eu-lead">
+      The words this tool and the wiki use, in a sentence each. See the <a href="/guide/">guide</a> for how they fit together, or go straight to the
+      <a href="/">creator</a>.
+    </p>
     <dl>
       {
         terms.map((t) => (
