@@ -22,7 +22,7 @@ export function line(value: unknown, max: number): string {
   if (typeof value === 'number' && Number.isFinite(value)) value = String(value);
   if (typeof value !== 'string') return '';
   return value
-    .replace(/[<>\u0000-\u001f\u007f  ]/g, ' ')
+    .replace(/[<>\u0000-\u001f\u007f\u2028\u2029]/g, ' ')
     .replace(/\s+/g, ' ')
     .trimStart()
     .slice(0, max);
@@ -63,9 +63,9 @@ const WORDS: Record<string, number> = { thousand: 1e3, k: 1e3, million: 1e6, m: 
  * Null when there is no number in it, or more than one.
  */
 export function parseNumber(text: string): number | null {
-  const found = /^[^\d.-]*(-?\d[\d,\s '’]*(?:\.\d+)?|\.\d+)\s*([a-z]+)?[^\d]*$/i.exec(text.trim());
+  const found = /^[^\d.-]*(-?\d[\d,\s\u00a0'’]*(?:\.\d+)?|\.\d+)\s*([a-z]+)?[^\d]*$/i.exec(text.trim());
   if (!found) return null;
-  const digits = found[1]!.replace(/[,\s '’]/g, '');
+  const digits = found[1]!.replace(/[,\s\u00a0'’]/g, '');
   const scale = found[2] ? WORDS[found[2].toLowerCase()] : 1;
   const number = Number(digits) * (scale ?? Number.NaN);
   return Number.isFinite(number) ? number : null;
