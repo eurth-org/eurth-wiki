@@ -37,7 +37,7 @@ Waiting on others:
 
 The first build. Not launched: the door opens on 23 December 2026.
 
-- **The creator:** a form with every field of Sandbox 7's infobox, 113 of them, under its eight headings (names, symbols, geography, demographics, politics, history, statistics, footnotes), with help text drawn from the tutorial's comments. The rarer fields sit under "More fields".
+- **The creator:** a form with every field of Sandbox 7's infobox, 109 of them, under its eight headings (names, symbols, geography, demographics, politics, history, statistics, footnotes), with help text drawn from the tutorial's comments. The rarer fields sit under "More fields".
 - **The infobox as wikitext:** one parameter a line under the tutorial's headings, with what the tutorial fills in from the page's name filled in from the form (image file names, their texts for screen readers, the map's width), mottoes and anthems in inverted commas, the native name in italics, "capital" for a largest city that is the capital, and the density and GDP per head worked out. Optionally with every empty line kept, to fill in on the wiki later.
 - **A live preview** that looks like a wiki infobox, light in either theme, and builds itself row by row as fields fill in: the signature touch.
 - **The page skeleton:** the tutorial's page, with its notice, opening sentence, three paragraphs to write, seven sections with their prompts, the gallery, the two leader portraits (captioned from the form) and the references.
