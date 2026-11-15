@@ -549,6 +549,11 @@
     .creator {
       grid-template-columns: minmax(0, 1fr);
     }
+
+    /* On a phone the result comes first: it is what the visitor came for, and the form is long. */
+    .result {
+      order: -1;
+    }
   }
 
   @media (max-width: 480px) {

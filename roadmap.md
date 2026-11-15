@@ -2,48 +2,57 @@
 
 Wiki turns a nation's details into a ready-to-paste country page and infobox for IIWiki, at wiki.eurth.org. It is door 14 of Eurth's 2026 advent calendar and opens on 23 December 2026 at 00:00 Europe/Brussels.
 
-Three parts: what comes next, what each release added (newest first), and what's not planned.
+Three parts: what comes next, what each release added (newest first), and what's not planned. Points from reviews are in the [feedback log](docs/feedback-log.md).
 
 ## Where to pick up
 
-**14 November 2026.** The brief is saved as CLAUDE.md and the repository exists (step 1 and 2 of the brief's working order). Nothing is built and there is no plan yet.
+**15 November 2026.** The tool is built and follows Sandbox 7 (`docs/sandbox-7.wiki`). `npm run check`, `npm run build`, `npm test` (125 tests) and `npm run axe` all pass, and CI is green. It is not deployed and won't be until its door: the launch workflow does that on 22 December at 22:30 UTC.
 
-The next step is step 3 of the working order, and it is waiting on Stijn:
+The next step is the first item under "Next": the paste test with Stijn. After that, the open questions below.
 
-1. **Stijn pastes the wikitext of User:Orioni/Sandbox 7** ("Eurth country setup"). Save it, unchanged, as `docs/sandbox-7.wiki`. Don't try to fetch it: iiwiki.com blocks automated requests.
-2. Read HANDBOOK.md in eurth-org/eurth-style if it exists by then, and the profile schema again in case it moved.
-3. Write the plan into "Next" below and show it to Stijn before building anything.
+On this machine Astro needs Homebrew's Node: put `/opt/homebrew/bin` first on `PATH`. To look at the built site: `npx wrangler dev --port 8823`.
 
 Waiting on others:
 
-- **Sandbox 7.** The fields, their groups, the help text, the article sections and their order all come from it. The mock-up's fields are placeholders.
-- **@eurth/style 1.0.0** is not released: on GitHub the repository holds only its brief, with no HANDBOOK.md, starter template or tag. The site can't start until it is. Check `gh release list -R eurth-org/eurth-style`. Until the handbook is written, its rules are the "handbook" part of that repository's CLAUDE.md.
-- **@eurth/profile 1.0.0** is written but not tagged, so it can't be installed by version yet (`github:eurth-org/eurth-profile#semver:^1`).
+- **Stijn, the paste test.** "Done" in the brief is when the wikitext of each example pastes into IIWiki and renders without errors; Stijn checks the first one. Nothing has been pasted yet, so every parameter name is as Sandbox 7 has it but none is proven on the wiki.
+- **Stijn, three answers** (see "Open questions").
+- **@eurth/profile, new fields for the `wiki` section.** Wiki keeps five everyday details there that the schema doesn't describe yet: `callingCode`, `timeZone`, `utcOffset`, `internetDomain` and `dateFormat`, each a text of at most 80 characters. The profile keeps unknown keys, so this works today; ask Foundations to add them to the schema (a minor release) so other tools can rely on them.
 
-## What the profile gives Wiki today
+## Open questions
 
-Read from eurth-org/eurth-profile on 14 November 2026 (schema 1).
-
-- **Wiki writes two sections:** `wiki` and `identity` (Card may edit `identity` too). It reads the rest and leaves every other key as it found it.
-- **`identity`:** `commonName`, `officialName`, `capital`, `demonym`, `motto`, `languages`.
-- **`wiki`:** only `drivesOn` (`left` or `right`) so far. Calling code, time zone and whatever else Sandbox 7 asks for aren't in the schema. Sections allow extra keys, so Wiki can keep them there from the start; ask Foundations to add them to the schema, which is a minor release.
-- **To read for "Fill from a profile":** `flag.svg`, `arms.svg`, `government` (`form`, `headOfState`, `headOfGovernment`, `legislature`), `seats` (`chamber`, `total`), `stats` (`population`, `areaKm2`, `gdpUsd`), `bank` (`currency`, `code`), `calendar` (`name`, `era`), `dynasty` (`monarch`, `house`), and also `cities.list` (the largest city) and `anthem.title`.
-- **Rules that shape the preview:** a profile's SVG only ever goes in an `<img>` (`svgDataUrl`), and its text is shown as text, never as markup.
-- **Examples to test against:** Hesperwick (a flag only), Vantmoor (mid-sized) and Calderwyn (every section).
+1. **The Eurth navbox.** The brief names `{{Eurth}}`; Sandbox 7 ends the page with `{{Template:Eurth topics}}`. The live page uses Sandbox 7's. Which is right today?
+2. **The nation's own navbox.** The brief says the live page adds it; Sandbox 7 has none. For now it is a text box on the live page, empty by default, so no page gets a red link. Is there a naming rule (such as "Teland topics") that would let Wiki fill it in?
+3. **"Under construction".** Sandbox 7 puts the notice on every new page, so both outputs carry it. Should the live page drop it?
 
 ## Next
 
-The plan goes here once Sandbox 7 is in. The brief's outline, for now:
+- **The paste test:** paste Teland's infobox and whole page into a sandbox on IIWiki, then Calderwyn's, Vantmoor's and Hesperwick's. Fix whatever the wiki objects to, and add a test for each fix.
+- **Numbers the wiki may want differently:** `area_km2` and the population go out with commas ("512,000"), as the mock-up shows them. If IIWiki's template does arithmetic on them it may want them bare; the paste test will tell.
+- **Examples with their pictures:** an example opened from the Examples page comes without its flag and arms, because a link holds text only. Offer the example profiles as files to load, once the hub is live.
+- **Languages as links:** official languages go out as plain text. Sandbox 7 doesn't say whether to link them.
+- **More than two leaders and events:** the form has two of each, as Sandbox 7 does; the template takes more.
+- **Lighthouse on the real address** after the door opens, and delete the launch workflow once the site is live.
 
-- **The engine and the words** (plain TypeScript and tests, needs nothing from @eurth/style): the field list from Sandbox 7, profile to fields, fields to infobox wikitext, the page skeleton, the sandbox and live-page outputs, the wiki file names for the flag and arms, the description, the guide, the field help and the glossary.
-- **The site** (once @eurth/style 1.0.0 is out, from its starter template): the Creator, Guide and Glossary pages, the live preview that builds row by row, the exports, and the handbook's checklist.
-- **The check:** the wikitext for each example profile pastes into IIWiki and renders without errors. Stijn checks the first one.
+## 15 November 2026: 0.1.0
 
-## Releases
+The first build. Not launched: the door opens on 23 December 2026.
 
-None yet.
+- **The creator:** a form with every field of Sandbox 7's infobox, 113 of them, under its eight headings (names, symbols, geography, demographics, politics, history, statistics, footnotes), with help text drawn from the tutorial's comments. The rarer fields sit under "More fields".
+- **The infobox as wikitext:** one parameter a line under the tutorial's headings, with what the tutorial fills in from the page's name filled in from the form (image file names, their texts for screen readers, the map's width), mottoes and anthems in inverted commas, the native name in italics, "capital" for a largest city that is the capital, and the density and GDP per head worked out. Optionally with every empty line kept, to fill in on the wiki later.
+- **A live preview** that looks like a wiki infobox, light in either theme, and builds itself row by row as fields fill in: the signature touch.
+- **The page skeleton:** the tutorial's page, with its notice, opening sentence, three paragraphs to write, seven sections with their prompts, the gallery, the two leader portraits (captioned from the form) and the references.
+- **Two outputs:** "for my sandbox" without the footer navboxes and the category, "for the live page" with them.
+- **The rest of the setup:** the flag's category line, the country-flag shortcut, the country category and the lists, each with its wikitext and the nation's name filled in.
+- **Fill from a profile:** identity, flag, arms, government, seats, stats, bank, calendar, dynasty, cities and anthem all map onto fields; Wiki writes `identity` and `wiki` and leaves every other section untouched.
+- **Exports:** Copy wikitext, Copy page skeleton, the flag and arms from the profile under their wiki names (SVG, or PNG if the file name says so), Copy description, Copy link and the share dialog.
+- **IIWiki conventions:** images only as `|250px|thumb|` on the left or right; a page linked once per section.
+- **Safe wikitext:** whatever is typed or arrives in a link stays inside its own parameter: loose pipes, unpaired braces and brackets, and unclosed comments and tags are disarmed.
+- **Pages:** Creator, Examples (four invented nations), Guide (the tutorial, rewritten for the web) and Glossary, on the shared shell from @eurth/style.
+- **Easter egg:** a population of zero adds the infobox line "Status: very quiet."
 
 ## Not planned
 
 - **Fetching from or posting to IIWiki.** It blocks automated requests, and the tools make no third-party requests of any kind. Wiki hands over wikitext to paste and images to upload by hand.
 - **Browser storage, accounts or a server.** As everywhere in the suite: a page lives in its link and in the profile file.
+- **Drawing templates in the preview.** The preview shows the infobox's rows in plain words. It doesn't run wiki templates typed into a field (`{{flag|…}}`, `{{convert|…}}`); the wiki does that.
+- **Writing the article.** The skeleton asks the questions; the answers are the nation's author's.
