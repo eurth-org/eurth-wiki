@@ -8,13 +8,13 @@ Three parts: what comes next, what each release added (newest first), and what's
 
 **15 November 2026.** The tool is built and follows Sandbox 7 (`docs/sandbox-7.wiki`). `npm run check`, `npm run build`, `npm test` (125 tests), `npm run axe` and `npm run smoke` all pass on @eurth/style 1.2.0 and @eurth/profile 1.0.1, which the nightly run brought in. The smoke test (the built site in real Chrome) and the component type check (`svelte-check`) are new in the handbook since 1.1.0 and are in `package.json`. It is not deployed and won't be until its door: the launch workflow does that on 22 December at 22:30 UTC.
 
-The paste test has begun: Stijn pasted Teland's whole page (sandbox output) into a sandbox on IIWiki on 15 November 2026 and it renders fine. The next step is the first item under "Next": the other three examples. After that, the open questions below.
+The paste test is done for the sandbox output: on 15 November 2026 Stijn pasted the whole page of all four examples (Teland, Calderwyn, Vantmoor, Hesperwick) into a sandbox on IIWiki, and each renders fine. With the handbook's checks passing, that is the brief's "done". What's left is under "Next": the live-page output in the wiki's preview, and the open questions below.
 
 On this machine Astro needs Homebrew's Node: put `/opt/homebrew/bin` first on `PATH`. To look at the built site: `npx wrangler dev --port 8823`.
 
 Waiting on others:
 
-- **Stijn, the rest of the paste test.** "Done" in the brief is when the wikitext of each example pastes into IIWiki and renders without errors. Teland, the first, passed on 15 November 2026. Calderwyn, Vantmoor and Hesperwick have not been pasted. Their pages differ from Teland's in three ways only: Calderwyn adds `national_anthem`, Calderwyn and Vantmoor name their flag (and Calderwyn its arms) as `.svg` files, and the values are their own. The live-page output (with `{{Template:Eurth topics}}` and the category) has not been pasted either.
+- **Stijn, the live-page output.** It has not been tried on the wiki. It adds `{{Template:Eurth topics}}` and `[[Category:<Name>]]` under the references, so try it with "Show preview" and don't save: a saved sandbox would land in the nation's category.
 - **Stijn, three answers** (see "Open questions").
 - **@eurth/profile, new fields for the `wiki` section.** Wiki keeps five everyday details there that the schema doesn't describe yet: `callingCode`, `timeZone`, `utcOffset`, `internetDomain` and `dateFormat`, each a text of at most 80 characters. The profile keeps unknown keys, so this works today; ask Foundations to add them to the schema (a minor release) so other tools can rely on them.
 
@@ -26,7 +26,7 @@ Waiting on others:
 
 ## Next
 
-- **The rest of the paste test:** paste Calderwyn's, Vantmoor's and Hesperwick's pages into a sandbox on IIWiki, and one live-page output. Fix whatever the wiki objects to, and add a test for each fix.
+- **The live-page output in the wiki's preview:** paste one (Teland's) into a sandbox and press "Show preview" without saving. It shows whether `{{Template:Eurth topics}}` exists under that name, which also answers the first open question.
 - **Examples with their pictures:** an example opened from the Examples page comes without its flag and arms, because a link holds text only. Offer the example profiles as files to load, once the hub is live.
 - **Languages as links:** official languages go out as plain text. Sandbox 7 doesn't say whether to link them.
 - **More than two leaders and events:** the form has two of each, as Sandbox 7 does; the template takes more.
@@ -48,7 +48,7 @@ The first build. Not launched: the door opens on 23 December 2026.
 - **Safe wikitext:** whatever is typed or arrives in a link stays inside its own parameter: loose pipes, unpaired braces and brackets, and unclosed comments and tags are disarmed.
 - **Pages:** Creator, Examples (four invented nations), Guide (the tutorial, rewritten for the web) and Glossary, on the shared shell from @eurth/style.
 - **Easter egg:** a population of zero adds the infobox line "Status: very quiet."
-- **Checked on IIWiki:** Teland's whole page, sandbox output, pasted into a sandbox on 15 November 2026 and rendered fine, with its 42 infobox parameters and its numbers written with commas ("512,000").
+- **Checked on IIWiki:** the whole page, sandbox output, of all four examples, pasted into a sandbox on 15 November 2026: each renders fine. That covers 43 infobox parameters, numbers written with commas ("512,000"), flag and arms named as `.png` and as `.svg`, and a nearly empty infobox (Hesperwick).
 
 ## Not planned
 
