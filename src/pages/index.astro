@@ -26,13 +26,17 @@ const faq = [
     q: 'Where is my page saved?',
     a: 'In its link. The link holds everything you typed, so copying the link is saving it. You can also save your nation as a profile file that the other Eurth tools can read. Nothing is kept in your browser or on a server.',
   },
+  {
+    q: 'Do I have to fill in every field?',
+    a: 'No. The form has every line of the infobox, more than a hundred, but an empty one draws no row. Names, a capital and a few numbers already make a respectable infobox. The rarer fields sit under "More fields".',
+  },
   { q: 'Does it work offline, and on a phone?', a: 'Yes to both. After the first visit the site keeps a copy of itself on your device and opens without a connection.' },
 ];
 ---
 
 <Page
   site={site}
-  jsonld={[webApplication(site, { featureList: ['Country infobox as wikitext', 'Live preview of the infobox', 'Page skeleton with prompts', 'Sandbox and live-page outputs', 'Fills in from a nation profile file', 'Flag and arms named for the wiki'] }), faqPage(faq)]}
+  jsonld={[webApplication(site, { featureList: ['Country infobox as wikitext', 'Live preview of the infobox', 'Page skeleton with prompts', 'Sandbox and live-page outputs', 'Flag shortcut and category snippets', 'Fills in from a nation profile file', 'Flag and arms named for the wiki'] }), faqPage(faq)]}
 >
   <div class="eu-stack">
     <header class="eu-stack intro">
@@ -51,6 +55,7 @@ const faq = [
         <li>Choose whether the page is for your sandbox or for the live wiki.</li>
         <li>Copy the infobox, or the whole page skeleton with a prompt under every heading, and paste it into the wiki's editor.</li>
         <li>Upload your flag and arms to the wiki under the names the infobox asks for.</li>
+        <li>Finish the setup: the flag shortcut, the category and the lists, each with its wikitext ready to copy.</li>
       </ol>
       <p>
         New to wiki pages? The <a href="/guide/">guide</a> walks through a country page from sandbox to live, the <a href="/glossary/">glossary</a> has the words, and

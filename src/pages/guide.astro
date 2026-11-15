@@ -1,122 +1,172 @@
 ---
-// The guide: a country page from sandbox to live, with sources and the day it was last brought
-// up to date. Search engines get the breadcrumb and the article's date as structured data.
-//
-// PROVISIONAL: this is to become Orioni's "Eurth country setup" tutorial (User:Orioni/Sandbox 7
-// on IIWiki), rewritten for the web. Until that text is in docs/sandbox-7.wiki, the guide covers
-// what the brief settles (sandbox first, images, links, navboxes and categories) and the shape
-// of a standard country article.
+// The guide: Orioni's "Eurth country setup" tutorial from IIWiki (docs/sandbox-7.wiki),
+// rewritten for the web with his permission. The steps, their order and the wikitext are the
+// tutorial's; the snippets come from the same code the creator uses, so they can't drift apart.
 import { article, ref, wikipedia } from '@eurth/style/build';
 import Page from '@eurth/style/components/Page.astro';
 import { site } from '../../eurth.config.mjs';
+import { GROUPS, fieldsOf } from '../wiki/fields';
 import { SECTIONS, imageLink } from '../wiki/page';
+import { steps } from '../wiki/setup';
+import { teland } from '../wiki/teland';
 
 const updated = '2026-11-15';
-const description = 'How to set up a country page on IIWiki: draft in your sandbox, fill in the infobox, name your images, link once per section, then go live. With sources.';
-const picture = imageLink('Map of Teland.png', 'Teland on Eurth.');
-const top = SECTIONS.filter((s) => !['See also', 'References'].includes(s.title));
+const description = 'How to add a country to Eurth on IIWiki, step by step: the country page and its infobox, the flag, the flag shortcut, the category and the lists.';
+const picture = imageLink('Selunna harbour.jpg', 'The harbour of Selunna.');
+const todo = Object.fromEntries(steps(teland).map((step) => [step.id, step]));
+const prompt = (text: string) => text.replace(/^\(WIP\.\s*/, '').replace(/\)$/, '');
 ---
 
 <Page
   site={site}
-  title="How to set up a country page on IIWiki"
+  title="How to add a country to Eurth on IIWiki"
   description={description}
   crumbs={[{ name: 'Guide', path: '/guide/' }]}
-  jsonld={[article(site, { headline: 'How to set up a country page on IIWiki', path: '/guide/', description, updated })]}
+  jsonld={[article(site, { headline: 'How to add a country to Eurth on IIWiki', path: '/guide/', description, updated })]}
 >
   <article class="eu-prose">
     <p class="eu-kicker">Guide</p>
-    <h1>How to set up a country page on IIWiki</h1>
+    <h1>How to add a country to Eurth on IIWiki</h1>
     <p class="eu-lead">
-      A country page is the front door of your nation. It doesn't need to be long on day one, but it does need the right frame: an infobox, an opening sentence and a
-      set of headings to grow into.
+      Five steps take a new nation from nothing to a page that sits properly in Eurth's lore: the country page, the flag, the flag shortcut, the category and the
+      lists. This is the Eurth country setup tutorial, with the <a href="/">creator</a> doing the typing.
     </p>
 
-    <h2>Draft in your sandbox first</h2>
+    <h2>Before you begin</h2>
     <p>
-      Every wiki user has room for drafts under their own name: a page such as <span class="eu-data">User:YourName/Sandbox</span>. Build your country there. Nobody
-      minds a half-finished sandbox, and you can save as often as you like without readers stumbling on it.
+      If wikis are new to you, read the wiki's manual of style and skim the help pages of
+      <a href={ref('https://www.mediawiki.org/wiki/Help:Contents', site.host)}>MediaWiki</a>, the software IIWiki runs on, and of
+      <a href={ref('https://commons.wikimedia.org/wiki/Help:Contents', site.host)}>Wikimedia Commons</a>, for how images work. Ten minutes there saves an evening
+      later.
     </p>
     <p>
-      One thing matters while you draft: leave the footer <a href="/glossary/#navbox">navboxes</a> and the <a href="/glossary/#category">categories</a> off the page.
-      Both file a page in lists that readers browse, and a draft doesn't belong there yet. In the <a href="/">creator</a>, the "For my sandbox" output leaves them
-      out for you.
-    </p>
-
-    <h2>Begin with the infobox</h2>
-    <p>
-      The <a href="/glossary/#infobox">infobox</a> is the panel on the right of the page with the flag and the facts. On wikis it is a
-      <a href="/glossary/#template">template</a> called Infobox country: you write a list of <a href="/glossary/#parameter">parameters</a>, one per line, and the wiki
-      draws the box.
-    </p>
-    <p>
-      Fill in what you know and leave the rest out: an empty parameter draws no row, so a short infobox looks finished, not broken. A good first pass is the names,
-      the capital, the form of government and who leads it, the area, the population and the currency. Numbers go in as plain figures; the wiki works out the
-      density.
+      Then draft in your <a href="/glossary/#sandbox">sandbox</a>, a page under your own user name. While the page is a draft, leave off the footer
+      <a href="/glossary/#navbox">navboxes</a> and the <a href="/glossary/#category">category</a>: both file a page where readers browse, and a draft doesn't belong
+      there yet. The creator's "For my sandbox" output leaves them out; "For the live page" puts them back.
     </p>
 
-    <h2>Name your images the way the wiki expects</h2>
+    <h2>1. Create the country page</h2>
     <p>
-      The infobox asks for image files by name. The custom, shared across wikis, is "Flag of" and "Coat of arms of" followed by the country's common name:
-      <span class="eu-data">Flag of Teland.svg</span>. Upload your files under exactly those names and the infobox finds them. The creator names its downloads that
-      way, so there is nothing to retype.
+      A country page opens with the <a href="/glossary/#infobox">infobox</a>, the panel on the right with the flag and the facts. Eurth uses the standard
+      <span class="eu-data">Infobox country</span> <a href="/glossary/#template">template</a> that IIWiki provides. You write a list of
+      <a href="/glossary/#parameter">parameters</a>, one per line, and the wiki draws the box.
     </p>
-
-    <h2>Open with one sentence</h2>
-    <p>
-      The first sentence says what the country is and where: the common name in bold, the official name in bold after it, the kind of state, and that it lies on
-      Eurth. A second sentence can give the capital and a third the population. The rest of the opening, the
-      <a href="/glossary/#lead">lead</a>, sums up the page in a paragraph or two, and can wait until the page has something to sum up.
-    </p>
-
-    <h2>Give every section a job</h2>
-    <p>Country articles share a set of headings, in an order readers have come to expect. Start with these and add your own under them:</p>
+    <p>The template is long, but it comes in eight parts, and no part is compulsory:</p>
     <ul>
       {
-        top.map((s) => (
+        GROUPS.map((group) => (
           <li>
-            <b>{s.title}:</b> {s.prompt.replaceAll('{name}', 'the country')}
+            <b>{group.label}:</b> {group.help}{' '}
+            <span class="eu-muted">
+              ({fieldsOf(group.id)
+                .filter((f) => !f.more)
+                .slice(0, 4)
+                .map((f) => f.label.toLowerCase())
+                .join(', ')}
+              {fieldsOf(group.id).length > 4 ? ' and more' : ''})
+            </span>
           </li>
         ))
       }
     </ul>
     <p>
-      The page skeleton from the creator has every heading in place with a one-line prompt under it. The prompts are comments: the wiki doesn't show them, so you can
-      leave them in until the section is written.
+      Fill in what you know. An empty line draws no row, so a short infobox looks finished, not broken. Three habits from the tutorial are worth keeping: mottoes
+      and anthems go in inverted commas, the native name goes in italics, and when the largest city is the capital you write the word
+      <span class="eu-data">capital</span> instead of repeating the name. The creator does all three for you.
+    </p>
+    <p>
+      Under the infobox comes an "under construction" notice, then the opening. Its first sentence says what the country is and where: the name in bold, the
+      official name, the continent, Eurth, and the neighbours on each side. Three short paragraphs follow:
+    </p>
+    <ol>
+      <li>Name, location, borders, rough population and size, the capital.</li>
+      <li>The political system, the history in one sentence, how it leads to the present in one more, and the head of state.</li>
+      <li>The economy in two sentences and international relations in one.</li>
+    </ol>
+    <p>After the opening, the page has seven sections, in this order. Each asks a few questions; answer the ones that matter for your nation.</p>
+    <dl>
+      {
+        SECTIONS.map((s) => (
+          <>
+            <dt>{s.title}</dt>
+            <dd>{prompt(s.prompt)}</dd>
+          </>
+        ))
+      }
+    </dl>
+    <p>
+      Geography comes with a small gallery of five pictures to swap for your own, and Politics with a pair of portraits for the head of state and the head of
+      government. The page ends with its references. The creator's page skeleton has all of it in place, with the questions under each heading as text to replace.
     </p>
 
-    <h2>Pictures: one form that works</h2>
-    <p>On IIWiki, write every picture in the text the same way, on the left or the right:</p>
+    <h2>2. Add the flags</h2>
+    <p>
+      Once the page is saved, the infobox shows a red link where the flag should be. The link is named after your country:
+      <span class="eu-data">Flag of Teland.png</span>, and likewise for the coat of arms and the map.
+    </p>
+    <ol>
+      <li>Click the red link. It opens the image uploader with the right file name already set.</li>
+      <li>Upload a PNG or an SVG: they make the prettiest images.</li>
+      <li>Before you save, add the image to your country's category, so everything about your nation stays in one place. Put this line in the image's description:</li>
+    </ol>
+    <pre class="eu-data eu-scroll" tabindex="0" aria-label="The category line for an image">{todo.flags?.wikitext}</pre>
+    <p>
+      To change the flag later, open the image's page and choose "Upload a new version of this file". Every page that shows the flag follows by itself. If your flag
+      comes from a nation profile, the creator hands it to you under the name the infobox asks for.
+    </p>
+
+    <h2>3. Create the country-flag shortcut</h2>
+    <p>Lists across the wiki show a miniature flag beside each country's name. A small template of your own makes that work for yours.</p>
+    <ol>
+      <li>Create the page <span class="eu-data">{todo.shortcut?.page}</span>, with your country's name in place of Teland.</li>
+      <li>Paste this, with your own name and flag file:</li>
+    </ol>
+    <pre class="eu-data eu-scroll" tabindex="0" aria-label="The country data template">{todo.shortcut?.wikitext}</pre>
+    <ol start="3">
+      <li>Press "Show preview" to test it, and "Save changes" when it looks right. If it doesn't, ask: someone on the wiki has seen the same thing before.</li>
+    </ol>
+    <p>From then on, this shows your flag and your country's name wherever you write it:</p>
+    <pre class="eu-data eu-scroll" tabindex="0" aria-label="The flag shortcode">{todo.flag?.wikitext}</pre>
+
+    <h2>4. Create the country category</h2>
+    <p>Create the page <span class="eu-data">{todo.category?.page}</span> and save it with these two lines. They point the category at your country page and file it among the countries of Eurth.</p>
+    <pre class="eu-data eu-scroll" tabindex="0" aria-label="The category page">{todo.category?.wikitext}</pre>
+
+    <h2>5. Add the country to the lists</h2>
+    <p>
+      Eurth keeps lists of its nations, gathered in <span class="eu-data">{todo.lists?.page}</span>. Add your country to the common ones. Respect each list's own rules
+      and keep it sorted: most are in alphabetical order.
+    </p>
+
+    <h2>House style</h2>
+    <p>Two conventions keep Eurth's pages consistent, and both save you trouble.</p>
+    <p><b>Pictures.</b> In the text, write every picture the same way, on the left or the right. Other sizes and options tend not to work on IIWiki.</p>
     <pre class="eu-data eu-scroll" tabindex="0" aria-label="An image in wikitext">{picture}</pre>
     <p>
-      That is the file's name, a width of 250 pixels, the word <a href="/glossary/#thumbnail">thumb</a> for a frame with a caption, the side, and the caption. Other
-      sizes and options tend not to work there, so don't spend an evening on them.
+      <b>Links.</b> Put a <a href="/glossary/#wikilink">link</a> on the first mention of a page in each section, and not again in that section. A reader who jumps
+      straight to Economy still finds the link to your capital there, and nobody wades through blue text.
     </p>
 
-    <h2>Link once per section</h2>
-    <p>
-      Put a <a href="/glossary/#wikilink">link</a> on the first mention of a page in each section, and not again in that section. A reader who jumps straight to
-      "Economy" still finds the link to your capital there; a reader going from top to bottom isn't wading through blue text. The capital in the infobox is linked for
-      you.
-    </p>
-
-    <h2>Go live</h2>
-    <p>
-      When the draft reads well, move it to its real title, the country's common name, and put back what the sandbox left out: the Eurth navbox, your nation's own
-      navbox if it has one, and the categories. The creator's "For the live page" output adds them at the foot of the page.
-    </p>
-    <p>
-      Then keep it alive. Update the leaders after an election, the population every few years, and add a section when your nation grows one. If you don't have a
-      nation yet, <a href="https://eurth.org">Eurth</a> has a world with room for it.
-    </p>
+    <h2>Removing a country</h2>
+    <p>Nations retire. When one does, tidy up after it:</p>
+    <ol>
+      <li>Remove the country from the common lists.</li>
+      <li>Use the wiki's "What links here" page to find any links that remain.</li>
+      <li>
+        Change the parent of the country's category from <span class="eu-data">Countries (Eurth)</span> to <span class="eu-data">Retired countries (Eurth)</span>.
+      </li>
+    </ol>
+    <p>The pages stay, as part of Eurth's history. If you don't have a nation yet, <a href="https://eurth.org">Eurth</a> has a world with room for one.</p>
 
     <h2>Sources</h2>
     <ul>
-      <li><a href={ref('https://iiwiki.com/', site.host)}>IIWiki</a>, the wiki Eurth's members write on.</li>
+      <li>
+        "Eurth country setup" by Orioni, a tutorial on <a href={ref('https://iiwiki.com/', site.host)}>IIWiki</a>, the wiki Eurth's members write on. This guide is that
+        tutorial, rewritten for the web with the author's permission.
+      </li>
+      <li><a href={ref('https://www.mediawiki.org/wiki/Help:Contents', site.host)}>Help:Contents</a>, MediaWiki: how to edit a wiki page.</li>
+      <li><a href={ref('https://commons.wikimedia.org/wiki/Help:Contents', site.host)}>Help:Contents</a>, Wikimedia Commons: how images and their pages work.</li>
       <li><a href={wikipedia('Template:Infobox country', site.host)}>Template:Infobox country</a>, Wikipedia: every parameter of the infobox, with examples.</li>
-      <li><a href={wikipedia('Wikipedia:WikiProject Countries', site.host)}>WikiProject Countries</a>, Wikipedia: the usual sections of a country article and what belongs in each.</li>
-      <li><a href={wikipedia('Wikipedia:Manual of Style/Linking', site.host)}>Manual of Style: Linking</a>, Wikipedia: when a link helps and when it is one too many.</li>
-      <li><a href={wikipedia('Help:Wikitext', site.host)}>Help:Wikitext</a>, Wikipedia: the markup itself, from headings to templates.</li>
     </ul>
     <p class="eu-muted">Last updated <time datetime={updated}>15 November 2026</time>.</p>
   </article>

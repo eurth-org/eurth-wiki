@@ -3,26 +3,27 @@
  * link or a file, how it is packed into a link, and the number handling the rest relies on.
  * Free of the page: it runs the same in the browser, at build time and in tests.
  */
-import { FIELDS, type FieldId } from './fields';
+import { FIELDS } from './fields';
 
-/** Everything the creator knows about a country: every field, as the text that was typed. */
-export type Country = Record<FieldId, string>;
+/** Everything the creator knows about a country: every field, by its parameter, as the text that was typed. */
+export type Country = Record<string, string>;
 
 /** An empty form. */
-export const defaults: Country = Object.freeze(Object.fromEntries(FIELDS.map((f) => [f.id, ''])) as Country);
+export const defaults: Readonly<Country> = Object.freeze(Object.fromEntries(FIELDS.map((f) => [f.param, ''])));
 
-/** The version of the link's shape. Raise it when a key changes meaning, and keep reading the old ones. */
+/** The version of the link's shape. Raise it when a parameter changes meaning, and keep reading the old ones. */
 export const LINK_VERSION = 1;
 
 /**
- * One line of plain text: no control characters, no line breaks, no runs of spaces, cut to
- * length. Angle brackets go too, so nothing typed or loaded can become markup, here or on the wiki.
+ * One line of text: no control characters, no line breaks, no runs of spaces, cut to length.
+ * Angle brackets stay, because wikitext needs them for references and footnotes; the page only
+ * ever shows a value as text, and infobox.ts keeps a stray tag from breaking the template.
  */
 export function line(value: unknown, max: number): string {
   if (typeof value === 'number' && Number.isFinite(value)) value = String(value);
   if (typeof value !== 'string') return '';
   return value
-    .replace(/[<>\u0000-\u001f\u007f\u2028\u2029]/g, ' ')
+    .replace(/[\u0000-\u001f\u007f\u2028\u2029]/g, ' ')
     .replace(/\s+/g, ' ')
     .trimStart()
     .slice(0, max);
@@ -30,31 +31,30 @@ export function line(value: unknown, max: number): string {
 
 /**
  * A country from anything: a link or a file is someone else's input, so every value is checked
- * and cut to length before it is used. Takes the link's short keys or the fields' own names;
- * unknown keys are dropped and missing ones stay empty.
+ * and cut to length before it is used. Unknown keys are dropped and missing ones stay empty.
  */
 export function clean(value: unknown): Country {
   const v = (typeof value === 'object' && value !== null && !Array.isArray(value) ? value : {}) as Record<string, unknown>;
-  const country = { ...defaults };
+  const country: Country = { ...defaults };
   for (const f of FIELDS) {
-    const text = line(Object.hasOwn(v, f.key) ? v[f.key] : Object.hasOwn(v, f.id) ? v[f.id] : '', f.max);
-    country[f.id] = f.kind === 'choice' ? (f.choices?.some((c) => c.value === text) ? text : '') : text;
+    const text = line(Object.hasOwn(v, f.param) ? v[f.param] : '', f.max);
+    country[f.param] = f.kind === 'choice' ? (f.choices?.some((c) => c.value === text) ? text : '') : text;
   }
   return country;
 }
 
-/** The country as it goes into the link: short keys, and only the fields that are filled in. */
+/** The country as it goes into the link: only the fields that are filled in, by their parameter. */
 export function compact(country: Country): Record<string, string> {
   const out: Record<string, string> = {};
   for (const f of FIELDS) {
-    const text = country[f.id].trim();
-    if (text) out[f.key] = text;
+    const text = (country[f.param] ?? '').trim();
+    if (text) out[f.param] = text;
   }
   return out;
 }
 
 /** True when nothing is filled in. */
-export const isEmpty = (country: Country): boolean => FIELDS.every((f) => !country[f.id].trim());
+export const isEmpty = (country: Country): boolean => FIELDS.every((f) => !(country[f.param] ?? '').trim());
 
 const WORDS: Record<string, number> = { thousand: 1e3, k: 1e3, million: 1e6, m: 1e6, mn: 1e6, billion: 1e9, bn: 1e9, b: 1e9, trillion: 1e12, tn: 1e12, t: 1e12 };
 
