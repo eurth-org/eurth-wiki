@@ -6,7 +6,7 @@ Three parts: what comes next, what each release added (newest first), and what's
 
 ## Where to pick up
 
-**15 November 2026.** The tool is built and follows Sandbox 7 (`docs/sandbox-7.wiki`). `npm run check`, `npm run build`, `npm test` (125 tests) and `npm run axe` all pass, and CI is green. It is not deployed and won't be until its door: the launch workflow does that on 22 December at 22:30 UTC.
+**15 November 2026.** The tool is built and follows Sandbox 7 (`docs/sandbox-7.wiki`). `npm run check`, `npm run build`, `npm test` (125 tests), `npm run axe` and `npm run smoke` all pass on @eurth/style 1.2.0 and @eurth/profile 1.0.1, which the nightly run brought in. The smoke test (the built site in real Chrome) and the component type check (`svelte-check`) are new in the handbook since 1.1.0 and are in `package.json`. It is not deployed and won't be until its door: the launch workflow does that on 22 December at 22:30 UTC.
 
 The paste test has begun: Stijn pasted Teland's whole page (sandbox output) into a sandbox on IIWiki on 15 November 2026 and it renders fine. The next step is the first item under "Next": the other three examples. After that, the open questions below.
 

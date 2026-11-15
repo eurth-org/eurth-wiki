@@ -24,10 +24,11 @@ Astro needs Node 22.23 or later (CI runs on Node 26).
 ```sh
 npm install          # then commit package-lock.json
 npm run dev          # the site while you work
-npm run check        # types
+npm run check        # types, in pages and components
 npm run build        # the static site, into dist/
 npm test             # the tool's own tests and the suite's checks (they read dist/)
 npm run axe          # accessibility: every page, both themes
+npm run smoke        # the built site in real Chrome: theme, nothing stored, offline
 npm run preview      # the built site with its real headers (wrangler dev)
 npm run images       # icons and the sharing image, after changing them
 ```
@@ -49,7 +50,7 @@ The site runs as a Cloudflare Worker serving static assets on its custom domain 
 
 1. Move what's done out of "Next" in [roadmap.md](roadmap.md) and add a dated section for the release, newest first.
 2. Set the version in `package.json` and run `npm install` so the lockfile follows.
-3. `npm run check && npm run build && npm test && npm run axe`. Commit and push.
+3. `npm run check && npm run build && npm test && npm run axe && npm run smoke`. Commit and push.
 
 ## Licence
 
