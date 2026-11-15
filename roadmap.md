@@ -8,13 +8,13 @@ Three parts: what comes next, what each release added (newest first), and what's
 
 **15 November 2026.** The tool is built and follows Sandbox 7 (`docs/sandbox-7.wiki`). `npm run check`, `npm run build`, `npm test` (125 tests) and `npm run axe` all pass, and CI is green. It is not deployed and won't be until its door: the launch workflow does that on 22 December at 22:30 UTC.
 
-The next step is the first item under "Next": the paste test with Stijn. After that, the open questions below.
+The paste test has begun: Stijn pasted Teland's whole page (sandbox output) into a sandbox on IIWiki on 15 November 2026 and it renders fine. The next step is the first item under "Next": the other three examples. After that, the open questions below.
 
 On this machine Astro needs Homebrew's Node: put `/opt/homebrew/bin` first on `PATH`. To look at the built site: `npx wrangler dev --port 8823`.
 
 Waiting on others:
 
-- **Stijn, the paste test.** "Done" in the brief is when the wikitext of each example pastes into IIWiki and renders without errors; Stijn checks the first one. Nothing has been pasted yet, so every parameter name is as Sandbox 7 has it but none is proven on the wiki.
+- **Stijn, the rest of the paste test.** "Done" in the brief is when the wikitext of each example pastes into IIWiki and renders without errors. Teland, the first, passed on 15 November 2026. Calderwyn, Vantmoor and Hesperwick have not been pasted. Their pages differ from Teland's in three ways only: Calderwyn adds `national_anthem`, Calderwyn and Vantmoor name their flag (and Calderwyn its arms) as `.svg` files, and the values are their own. The live-page output (with `{{Template:Eurth topics}}` and the category) has not been pasted either.
 - **Stijn, three answers** (see "Open questions").
 - **@eurth/profile, new fields for the `wiki` section.** Wiki keeps five everyday details there that the schema doesn't describe yet: `callingCode`, `timeZone`, `utcOffset`, `internetDomain` and `dateFormat`, each a text of at most 80 characters. The profile keeps unknown keys, so this works today; ask Foundations to add them to the schema (a minor release) so other tools can rely on them.
 
@@ -26,8 +26,7 @@ Waiting on others:
 
 ## Next
 
-- **The paste test:** paste Teland's infobox and whole page into a sandbox on IIWiki, then Calderwyn's, Vantmoor's and Hesperwick's. Fix whatever the wiki objects to, and add a test for each fix.
-- **Numbers the wiki may want differently:** `area_km2` and the population go out with commas ("512,000"), as the mock-up shows them. If IIWiki's template does arithmetic on them it may want them bare; the paste test will tell.
+- **The rest of the paste test:** paste Calderwyn's, Vantmoor's and Hesperwick's pages into a sandbox on IIWiki, and one live-page output. Fix whatever the wiki objects to, and add a test for each fix.
 - **Examples with their pictures:** an example opened from the Examples page comes without its flag and arms, because a link holds text only. Offer the example profiles as files to load, once the hub is live.
 - **Languages as links:** official languages go out as plain text. Sandbox 7 doesn't say whether to link them.
 - **More than two leaders and events:** the form has two of each, as Sandbox 7 does; the template takes more.
@@ -49,6 +48,7 @@ The first build. Not launched: the door opens on 23 December 2026.
 - **Safe wikitext:** whatever is typed or arrives in a link stays inside its own parameter: loose pipes, unpaired braces and brackets, and unclosed comments and tags are disarmed.
 - **Pages:** Creator, Examples (four invented nations), Guide (the tutorial, rewritten for the web) and Glossary, on the shared shell from @eurth/style.
 - **Easter egg:** a population of zero adds the infobox line "Status: very quiet."
+- **Checked on IIWiki:** Teland's whole page, sandbox output, pasted into a sandbox on 15 November 2026 and rendered fine, with its 42 infobox parameters and its numbers written with commas ("512,000").
 
 ## Not planned
 
