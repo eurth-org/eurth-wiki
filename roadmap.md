@@ -8,25 +8,22 @@ Three parts: what comes next, what each release added (newest first), and what's
 
 **15 November 2026.** The tool is built and follows Sandbox 7 (`docs/sandbox-7.wiki`). `npm run check`, `npm run build`, `npm test` (125 tests), `npm run axe` and `npm run smoke` all pass on @eurth/style 1.2.0 and @eurth/profile 1.0.1, which the nightly run brought in. The smoke test (the built site in real Chrome) and the component type check (`svelte-check`) are new in the handbook since 1.1.0 and are in `package.json`. It is not deployed and won't be until its door: the launch workflow does that on 22 December at 22:30 UTC.
 
-The paste test is done for the sandbox output: on 15 November 2026 Stijn pasted the whole page of all four examples (Teland, Calderwyn, Vantmoor, Hesperwick) into a sandbox on IIWiki, and each renders fine. With the handbook's checks passing, that is the brief's "done". What's left is under "Next": the live-page output in the wiki's preview, and the open questions below.
+The paste test is done. On 15 November 2026 Stijn pasted the whole page of all four examples (Teland, Calderwyn, Vantmoor, Hesperwick) into a sandbox on IIWiki, and each renders fine; Teland's live-page output previews fine too, with the `{{Template:Eurth topics}}` navbox. With the handbook's checks passing, that is the brief's "done". What's left is the two open questions below and what's under "Next".
 
 On this machine Astro needs Homebrew's Node: put `/opt/homebrew/bin` first on `PATH`. To look at the built site: `npx wrangler dev --port 8823`.
 
 Waiting on others:
 
-- **Stijn, the live-page output.** It has not been tried on the wiki. It adds `{{Template:Eurth topics}}` and `[[Category:<Name>]]` under the references, so try it with "Show preview" and don't save: a saved sandbox would land in the nation's category.
-- **Stijn, three answers** (see "Open questions").
+- **Stijn, two answers** (see "Open questions").
 - **@eurth/profile, new fields for the `wiki` section.** Wiki keeps five everyday details there that the schema doesn't describe yet: `callingCode`, `timeZone`, `utcOffset`, `internetDomain` and `dateFormat`, each a text of at most 80 characters. The profile keeps unknown keys, so this works today; ask Foundations to add them to the schema (a minor release) so other tools can rely on them.
 
 ## Open questions
 
-1. **The Eurth navbox.** The brief names `{{Eurth}}`; Sandbox 7 ends the page with `{{Template:Eurth topics}}`. The live page uses Sandbox 7's. Which is right today?
-2. **The nation's own navbox.** The brief says the live page adds it; Sandbox 7 has none. For now it is a text box on the live page, empty by default, so no page gets a red link. Is there a naming rule (such as "Teland topics") that would let Wiki fill it in?
-3. **"Under construction".** Sandbox 7 puts the notice on every new page, so both outputs carry it. Should the live page drop it?
+1. **The nation's own navbox.** The brief says the live page adds it; Sandbox 7 has none. For now it is a text box on the live page, empty by default, so no page gets a red link. Is there a naming rule (such as "Teland topics") that would let Wiki fill it in?
+2. **"Under construction".** Sandbox 7 puts the notice on every new page, so both outputs carry it. Should the live page drop it?
 
 ## Next
 
-- **The live-page output in the wiki's preview:** paste one (Teland's) into a sandbox and press "Show preview" without saving. It shows whether `{{Template:Eurth topics}}` exists under that name, which also answers the first open question.
 - **Examples with their pictures:** an example opened from the Examples page comes without its flag and arms, because a link holds text only. Offer the example profiles as files to load, once the hub is live.
 - **Languages as links:** official languages go out as plain text. Sandbox 7 doesn't say whether to link them.
 - **More than two leaders and events:** the form has two of each, as Sandbox 7 does; the template takes more.
@@ -48,7 +45,7 @@ The first build. Not launched: the door opens on 23 December 2026.
 - **Safe wikitext:** whatever is typed or arrives in a link stays inside its own parameter: loose pipes, unpaired braces and brackets, and unclosed comments and tags are disarmed.
 - **Pages:** Creator, Examples (four invented nations), Guide (the tutorial, rewritten for the web) and Glossary, on the shared shell from @eurth/style.
 - **Easter egg:** a population of zero adds the infobox line "Status: very quiet."
-- **Checked on IIWiki:** the whole page, sandbox output, of all four examples, pasted into a sandbox on 15 November 2026: each renders fine. That covers 43 infobox parameters, numbers written with commas ("512,000"), flag and arms named as `.png` and as `.svg`, and a nearly empty infobox (Hesperwick).
+- **Checked on IIWiki:** the whole page, sandbox output, of all four examples, pasted into a sandbox on 15 November 2026: each renders fine. That covers 43 infobox parameters, numbers written with commas ("512,000"), flag and arms named as `.png` and as `.svg`, and a nearly empty infobox (Hesperwick). Teland's live-page output, tried with "Show preview": fine as well, so the footer keeps Sandbox 7's `{{Template:Eurth topics}}` and not the brief's `{{Eurth}}`.
 
 ## Not planned
 
