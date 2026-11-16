@@ -15,7 +15,7 @@ On this machine Astro needs Homebrew's Node: put `/opt/homebrew/bin` first on `P
 Waiting on others:
 
 - **Stijn, two answers** (see "Open questions").
-- **@eurth/profile, new fields for the `wiki` section.** Wiki keeps five everyday details there that the schema doesn't describe yet: `callingCode`, `timeZone`, `utcOffset`, `internetDomain` and `dateFormat`, each a text of at most 80 characters. The profile keeps unknown keys, so this works today; ask Foundations to add them to the schema (a minor release) so other tools can rely on them.
+- **@eurth/profile, new fields for the `wiki` section.** Wiki keeps five everyday details there that the schema doesn't describe yet: `callingCode`, `timeZone`, `utcOffset`, `internetDomain` and `dateFormat`, each a text of at most 80 characters. The profile keeps unknown keys, so this works today. Asked for on 16 November 2026 in [eurth-org/eurth-profile#3](https://github.com/eurth-org/eurth-profile/issues/3): a minor release there, and nothing in Wiki has to change when it lands.
 
 ## Open questions
 
